@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\AverageRuster\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\AverageRuster\\.nuget\\packages"
+    ]
+  }
+}

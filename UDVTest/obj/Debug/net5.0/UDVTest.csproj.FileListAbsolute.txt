@@ -1,0 +1,16 @@
+C:\Users\AverageRuster\Documents\GitHub\UDV-test\UDVTest\bin\Debug\net5.0\UDVTest.exe
+C:\Users\AverageRuster\Documents\GitHub\UDV-test\UDVTest\bin\Debug\net5.0\UDVTest.deps.json
+C:\Users\AverageRuster\Documents\GitHub\UDV-test\UDVTest\bin\Debug\net5.0\UDVTest.runtimeconfig.json
+C:\Users\AverageRuster\Documents\GitHub\UDV-test\UDVTest\bin\Debug\net5.0\UDVTest.runtimeconfig.dev.json
+C:\Users\AverageRuster\Documents\GitHub\UDV-test\UDVTest\bin\Debug\net5.0\UDVTest.dll
+C:\Users\AverageRuster\Documents\GitHub\UDV-test\UDVTest\bin\Debug\net5.0\ref\UDVTest.dll
+C:\Users\AverageRuster\Documents\GitHub\UDV-test\UDVTest\bin\Debug\net5.0\UDVTest.pdb
+C:\Users\AverageRuster\Documents\GitHub\UDV-test\UDVTest\obj\Debug\net5.0\UDVTest.csproj.AssemblyReference.cache
+C:\Users\AverageRuster\Documents\GitHub\UDV-test\UDVTest\obj\Debug\net5.0\UDVTest.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\AverageRuster\Documents\GitHub\UDV-test\UDVTest\obj\Debug\net5.0\UDVTest.AssemblyInfoInputs.cache
+C:\Users\AverageRuster\Documents\GitHub\UDV-test\UDVTest\obj\Debug\net5.0\UDVTest.AssemblyInfo.cs
+C:\Users\AverageRuster\Documents\GitHub\UDV-test\UDVTest\obj\Debug\net5.0\UDVTest.csproj.CoreCompileInputs.cache
+C:\Users\AverageRuster\Documents\GitHub\UDV-test\UDVTest\obj\Debug\net5.0\UDVTest.dll
+C:\Users\AverageRuster\Documents\GitHub\UDV-test\UDVTest\obj\Debug\net5.0\ref\UDVTest.dll
+C:\Users\AverageRuster\Documents\GitHub\UDV-test\UDVTest\obj\Debug\net5.0\UDVTest.pdb
+C:\Users\AverageRuster\Documents\GitHub\UDV-test\UDVTest\obj\Debug\net5.0\UDVTest.genruntimeconfig.cache
