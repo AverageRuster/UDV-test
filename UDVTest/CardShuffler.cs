@@ -149,11 +149,10 @@ namespace UDVTest
                 else if (command == "/list")
                 {
                     ShowDecks();
-                    CheckMainInput();
                 }   
 
                 //Выход из программы
-                else if (command == "close")
+                else if (command == "/close")
                 {
                     return;
                 }     
@@ -434,21 +433,20 @@ namespace UDVTest
                 for (int j = 0; j < shuffleCount; j++)
                 { 
                 
+                    divRandom = randomCounter.Next(minRandValue, maxRandValue);
+
+                    //Разделение карт (половина колоды + погрешность деления)
+                    firstDiv = cardCount / 2 + divRandom;
+                            
+                    if (firstDiv >= 2)
+                    {
+                        minRandValue = -(firstDiv / 10);
+                        maxRandValue = firstDiv / 10 + 1;
                         divRandom = randomCounter.Next(minRandValue, maxRandValue);
 
                         //Разделение карт (половина колоды + погрешность деления)
-                        firstDiv = cardCount / 2 + divRandom;
-                            
-                        if (firstDiv >= 2)
-                        {
-                            minRandValue = -(firstDiv / 10);
-                            maxRandValue = firstDiv / 10 + 1;
-                            divRandom = randomCounter.Next(minRandValue, maxRandValue);
-
-                            //Разделение карт (половина колоды + погрешность деления)
-                            secondDiv = firstDiv / 2 + divRandom;
-                        }
-                    
+                        secondDiv = firstDiv / 2 + divRandom;
+                    }                    
 
                     //Меняем местами первую и вторую четверти изначальной колоды
                     Shuffle(secondDiv, firstDiv);
@@ -477,6 +475,7 @@ namespace UDVTest
                         //Переносим карту в новую позицию
                         selectedDeck[i] = selectedDeck[newPos];
                     }
+                    
                     //Если новая позиция карты лежит за пределами массива
                     else if (newPos >= border)
                     {
