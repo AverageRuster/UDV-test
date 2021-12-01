@@ -94,7 +94,7 @@ namespace UDVTest
 
 #region InputManagement
         ///<Summary>
-        ///Проверяем ввод в главном меню
+        ///Проверяет ввод в главном меню
         ///</Summary>
         static void CheckMainInput()
         {
@@ -103,9 +103,11 @@ namespace UDVTest
 
             //Проверяем пользовательский ввод
             string[] userInput = Console.ReadLine().Split(' ');
+
+            //Переводим все символы команды в нижний регистр
             string command = userInput[0].ToLower();
 
-            //Проверка ввода: если первое слово не является командой или если помимо команды /list присутствует другой ввод, или если введено более 2 слов
+            //Проверка ввода: если первое слово не является командой или если помимо команд /list и /close присутствует другой ввод, или если введено более 2 слов
             if ((command != "/create" && command != "/select" && command != "/list" && command != "/close") ||
             ((command == "/list" || command == "/close") && userInput.Length > 1) ||
             userInput.Length > 2)      
@@ -114,7 +116,8 @@ namespace UDVTest
                 Console.WriteLine("\n-= Incorrect input =-\n");
                 CheckMainInput();
             } 
-            //Проверка ввода: если введена команда /create или /select, но не введено имя колоды
+
+            //Проверка ввода: если введена команда /create или /select, но не введено название колоды или если название пустое
             else if (((command == "/create" || command == "/select") && userInput.Length == 1) || 
             (userInput.Length == 2 && String.IsNullOrWhiteSpace(userInput[1])))
             {
@@ -122,6 +125,7 @@ namespace UDVTest
                 Console.WriteLine("\n-= Incorrect input. You must enter deck name =-\n");
                 CheckMainInput();
             }
+
             //Если все введено верно
             else
             {                          
@@ -162,23 +166,33 @@ namespace UDVTest
         static void CheckSelectedDeckInput()
         {
             //Выводим сообщение со списком команд
-            Console.Write("\n-= /show | /shuffle | /remove | /back =-\nEnter command: ");
+            Console.Write("\n-= Selected deck: " + selectedDeckName + " =-\n-= /show | /shuffle | /remove | /back =-\nEnter command: ");
 
             //Проверяем пользовательский ввод
             string[] userInput = Console.ReadLine().Split(' ');
-            string command = userInput[0].ToLower();
 
-            if (userInput[0] != "/shuffle" &&  (userInput.Length != 1 && userInput[0] != "/show" && userInput[0] != "/remove" && userInput[0] != "/back"))
+            //Переводим все символы команды в нижний регистр
+            string command = userInput[0].ToLower();
+            
+            //Если команда введена неверно
+            if (userInput.Length > 2 ||
+            (userInput.Length == 2 && command != "/shuffle") ||
+            (userInput.Length == 1 && command != "/show" && command != "/shuffle" && command != "/remove" && command != "/back" ))
             {
-                Console.WriteLine("\n-= Incorrect input =-\n");
+                Console.WriteLine("\n-= Incorrect input =-");
                 CheckSelectedDeckInput();
             }
+
+            //Если ввод верный
             else
             {
+                //Показываем колоду
                 if (userInput[0] == "/show")
                 {
                     ShowDeck();
-                }   
+                } 
+
+                //Перемешиваем колоду  
                 else if (userInput[0] == "/shuffle")
                 {
                     if (userInput.Length > 1)
@@ -190,10 +204,14 @@ namespace UDVTest
                         ShuffleDeck(null);
                     }
                 }               
+                
+                //Удаляем колоду
                 else if (userInput[0] == "/remove")
                 {
                     RemoveDeck();
                 }  
+               
+                //Возвращаемся в главное меню
                 else if (userInput[0] == "/back")
                 {
                     CheckMainInput();
@@ -208,6 +226,7 @@ namespace UDVTest
         ///</Summary>
         static void CreateNewDeck()
         {
+            //Проверяем, существует ли уже колода с таким именем
             if (decks.ContainsKey(selectedDeckName))
             {
                 Console.WriteLine("\n-= Deck with this name already exists =-\n");
@@ -235,6 +254,7 @@ namespace UDVTest
         ///</Summary>
         static void SelectDeck()
         {
+            //Проверяем, существует ли колода с таким названием
             if (!decks.ContainsKey(selectedDeckName))
             {
                 Console.WriteLine("\n-= Deck with this name has not been found =-\n");
@@ -259,12 +279,16 @@ namespace UDVTest
                 CheckMainInput();
                 return;
             }
+
             Console.WriteLine("\n-= Deck list =-");
+
             foreach (string deckName in decks.Keys)
             {
                 Console.WriteLine("- " + deckName);
             }
+
             Console.Write("\n");
+
             //Возвращаемся в главное меню
             CheckMainInput();
         }
@@ -298,6 +322,7 @@ namespace UDVTest
             string suit = null;
             
             Console.WriteLine("\n-= Selected deck =-");
+
             //Показываем карту (значение + масть)
             for (int i = 0; i < cardCount; i++)
             {               
