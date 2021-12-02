@@ -77,7 +77,7 @@ namespace UDVTest
             
             if (cardCount > 0)
             {
-                Console.WriteLine("-= Welcome! =-\n");
+                Console.WriteLine("\n-= Welcome! =-");
 
                 //Загружаем колоды         
                 Load();
@@ -99,7 +99,7 @@ namespace UDVTest
         static void CheckMainInput()
         {
             //Выводим сообщение со списком команд
-            Console.Write("Command list: /create + 'name' | /select + 'name' | /list | /close\nEnter command: ");
+            Console.Write("\nCommand list: /create + 'name' | /select + 'name' | /list | /close\nEnter command: ");
 
             //Проверяем пользовательский ввод
             string[] userInput = Console.ReadLine().Split(' ');
@@ -113,7 +113,7 @@ namespace UDVTest
             userInput.Length > 2)      
             {
                 //Неверный ввод команды
-                Console.WriteLine("\n-= Incorrect input =-\n");
+                Console.WriteLine("\n-= Incorrect input =-");
                 CheckMainInput();
             } 
 
@@ -122,7 +122,7 @@ namespace UDVTest
             (userInput.Length == 2 && String.IsNullOrWhiteSpace(userInput[1])))
             {
                 //Неверный ввод команды
-                Console.WriteLine("\n-= Incorrect input. You must enter deck name =-\n");
+                Console.WriteLine("\n-= Incorrect input. You must enter deck name =-");
                 CheckMainInput();
             }
 
@@ -213,6 +213,7 @@ namespace UDVTest
                 //Возвращаемся в главное меню
                 else if (userInput[0] == "/back")
                 {
+                    selectedDeckName = null;
                     CheckMainInput();
                 }  
             }
@@ -228,7 +229,7 @@ namespace UDVTest
             //Проверяем, существует ли уже колода с таким именем
             if (decks.ContainsKey(selectedDeckName))
             {
-                Console.WriteLine("\n-= Deck with this name already exists =-\n");
+                Console.WriteLine("\n-= Deck with this name already exists =-");
                 selectedDeckName = null;
                 CheckMainInput();
                 return;  
@@ -243,7 +244,7 @@ namespace UDVTest
 
             decks.Add(selectedDeckName, newDeck);               
             Save();  
-            Console.WriteLine("\n-= Deck created =-\n"); 
+            Console.WriteLine("\n-= Deck created =-"); 
             selectedDeckName = null;
             CheckMainInput();   
         }                                                
@@ -256,7 +257,7 @@ namespace UDVTest
             //Проверяем, существует ли колода с таким названием
             if (!decks.ContainsKey(selectedDeckName))
             {
-                Console.WriteLine("\n-= Deck with this name has not been found =-\n");
+                Console.WriteLine("\n-= Deck with this name has not been found =-");
                 selectedDeckName = null;
                 CheckMainInput();
                 return;
@@ -274,7 +275,7 @@ namespace UDVTest
             //Колод нет, выходим
             if (decks.Count == 0)
             {
-                Console.WriteLine("\n-= No decks created =-\n");
+                Console.WriteLine("\n-= No decks created =-");
                 CheckMainInput();
                 return;
             }
@@ -285,8 +286,6 @@ namespace UDVTest
             {
                 Console.WriteLine("- " + deckName);
             }
-
-            Console.Write("\n");
 
             //Возвращаемся в главное меню
             CheckMainInput();
@@ -300,7 +299,7 @@ namespace UDVTest
         static void RemoveDeck()
         {   
             decks.Remove(selectedDeckName);
-            Console.WriteLine("\n-= Deck removed =-\n");
+            Console.WriteLine("\n-= Deck removed =-");
             selectedDeckName = null;
             Save();
 
@@ -360,27 +359,24 @@ namespace UDVTest
                 if (mode == "random")
                 {
                     RandomDeckShuffle();
-                    Console.WriteLine("\n-= Shuffle done =-");
                 }
                 else if (mode == "manual")
                 {
                     ManualDeckShuffle();
-                    Console.WriteLine("\n-= Shuffle done =-");
                 }    
                 else
                 {
-                    Console.WriteLine("\n-= Incorrect input =-\n");
-
-                    //Возвращаемся в меню выбора действий с колодой
-                    CheckSelectedDeckInput();  
+                    Console.WriteLine("\n-= Incorrect input =-");
+                    ShuffleDeck(null);  
                 }
             }
             else
             {
                 Console.WriteLine("\n-= Not enough cards to shuffle =-");
-            }
-            //Возвращаемся в меню выбора действий с колодой
-            CheckSelectedDeckInput();       
+
+                //Возвращаемся в меню выбора действий с колодой
+                CheckSelectedDeckInput();    
+            }  
         }
 
         ///<Summary>
@@ -402,6 +398,11 @@ namespace UDVTest
                 selectedDeck[newPandomPosition] = savedCardID;
             }
             Save();
+
+            Console.WriteLine("\n-= Shuffle done =-");
+
+            //Возвращаемся в меню выбора действий с колодой
+            CheckSelectedDeckInput();    
         }
 
         ///<Summary>
@@ -488,6 +489,11 @@ namespace UDVTest
             }  
 
             Save();
+
+            Console.WriteLine("\n-= Shuffle done =-");
+
+            //Возвращаемся в меню выбора действий с колодой
+            CheckSelectedDeckInput();    
         }
 #endregion
 #endregion
@@ -506,7 +512,7 @@ namespace UDVTest
             }
             else
             {
-                Console.WriteLine("-= Save file has not been found. New one has been created =-\n");
+                Console.WriteLine("\n-= Save file has not been found. New one has been created =-");
                 decks = new Dictionary<string, int[]>(); 
                 Save();
             }
